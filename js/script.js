@@ -41,14 +41,26 @@ function canSubmit() {
   EXIF.getData(document.querySelector("input#file").files[0], function () {
     var meta = EXIF.getAllTags(this);
 
-    // if (!meta.GPSAltitudeRef && meta.GPSAltitudeRef !== 0) {
-    //   canFormSubmit = false;
-    // }
+    console.log("meta", meta);
+
+    if (!meta) {
+      canFormSubmit = false;
+      // TODO: alert can not find any meta data
+    } else {
+      if (!meta.GPSLatitudeRef) canFormSubmit = false;
+      else if (!meta.GPSLatitude || !meta.GPSLatitude.length)
+        canFormSubmit = false;
+      else if (!meta.GPSLongitudeRef) canFormSubmit = false;
+      else if (!meta.GPSLongitude || !meta.GPSLongitude.length)
+        canFormSubmit = false;
+      else canFormSubmit = true;
+    }
   });
 }
 
 // submit form to the server
 function submitForm(event) {
   event.preventDefault();
+  canFormSubmit ? alert("it is a true image") : alert("warning");
 }
 /* ------------------ END: Check image has gps data or not ------------------ */

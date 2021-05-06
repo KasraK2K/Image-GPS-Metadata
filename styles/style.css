@@ -15,3 +15,8 @@ button {
 .text-shadow-3 {
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
+
+.my-img-responsive {
+  max-height: 360px;
+  max-width: auto;
+}

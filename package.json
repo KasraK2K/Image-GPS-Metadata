@@ -1,10 +1,11 @@
 {
-  "name": "gps_image_upload",
+  "name": "gps-image-upload",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon"
+    "start": "node server.js",
+    "start:dev": "nodemon"
   },
   "author": "",
   "license": "ISC",
