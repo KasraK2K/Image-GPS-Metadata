@@ -18,16 +18,16 @@
     />
     <link rel="stylesheet" href="/css/style.css" />
   </head>
-  <body
-    class="full-height d-flex justify-content-center align-items-center my-auto"
-  >
+  <body>
     <div class="container">
-      <h1 class="mb-3 title text-center text-shadow-3 mb-5">image uploader</h1>
+      <h1 class="mb-3 title text-center text-shadow-3 mt-5 mb-5">
+        image uploader
+      </h1>
 
       <form
         id="form"
         onsubmit="return submitForm(event)"
-        class="row g-3 needs-validation"
+        class="row g-3 needs-validation px-2"
         novalidate
       >
         <!-- form elements column -->
@@ -42,7 +42,7 @@
           </div>
 
           <!-- last name -->
-          <div class="mb-4 position-relative">
+          <div class="pt-2 mb-4 position-relative">
             <label for="lastName" class="form-label">Last name</label>
             <input type="text" class="form-control" id="lastName" required />
 
@@ -51,7 +51,7 @@
           </div>
 
           <!-- username -->
-          <div class="mb-4 position-relative">
+          <div class="pt-2 mb-4 position-relative">
             <label for="username" class="form-label"> Username </label>
             <div class="input-group has-validation">
               <span class="input-group-text" id="username">@</span>
@@ -68,7 +68,7 @@
           </div>
 
           <!-- image -->
-          <div class="mb-4 position-relative">
+          <div class="pt-2 mb-4 position-relative">
             <label for="file" class="form-label"> Image </label>
             <input
               type="file"
@@ -86,7 +86,7 @@
             </div>
           </div>
 
-          <div class="col-12">
+          <div class="pt-2 col-12">
             <button id="submit" class="btn btn-primary" type="submit">
               Submit form
             </button>
