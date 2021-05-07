@@ -1,5 +1,6 @@
 .title {
-  font-family: "Courgette", cursive;
+  font-family: "Libre Barcode 128 Text", cursive;
+  font-size: 3rem;
 }
 
 .full-height {
@@ -8,12 +9,12 @@
 
 label,
 button {
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-  font-family: "Courgette", cursive;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+  font-family: "Nunito", sans-serif;
 }
 
-.text-shadow-3 {
-  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+.text-shadow {
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
 
 .my-img-responsive {

@@ -1,121 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GPS Image Uploader</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="/css/style.css" />
-  </head>
-  <body>
-    <div class="container mb-5">
-      <h1 class="mb-3 title text-center text-shadow-3 mt-5 mb-5">
-        image uploader
-      </h1>
 
-      <form
-        id="form"
-        onsubmit="return submitForm(event)"
-        class="row g-3 needs-validation px-2"
-        novalidate
-      >
-        <!-- form elements column -->
-        <div class="py-4 px-4 shadow rounded col-md-6">
-          <!-- first name -->
-          <div class="mb-4 position-relative">
-            <label for="firstName" class="form-label">First name</label>
-            <input type="text" class="form-control" id="firstName" required />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GPS Image Uploader</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+128+Text&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
 
-            <div class="valid-tooltip">Looks good!</div>
-            <div class="invalid-tooltip">Please fill first name.</div>
-          </div>
+<body class=" bg-dark">
+  <div class="container mb-5">
+    <!-- header -->
+    <h1 class="mb-3 title text-center mt-5 mb-5 text-white">
+      image uploader
+    </h1>
 
-          <!-- last name -->
-          <div class="pt-2 mb-4 position-relative">
-            <label for="lastName" class="form-label">Last name</label>
-            <input type="text" class="form-control" id="lastName" required />
+    <!-- form -->
+    <form id="form" onsubmit="return submitForm(event)" class="row g-3 needs-validation px-2" novalidate>
+      <!-- form elements column -->
+      <div class="py-4 px-4 shadow rounded col-md-6 bg-white">
+        <!-- first name -->
+        <div class="mb-4 position-relative">
+          <label for="firstName" class="form-label">First name</label>
+          <input type="text" class="form-control" id="firstName" required />
 
-            <div class="valid-tooltip">Looks good!</div>
-            <div class="invalid-tooltip">Please fill last name.</div>
-          </div>
+          <div class="valid-tooltip">Looks good!</div>
+          <div class="invalid-tooltip">Please fill first name.</div>
+        </div>
 
-          <!-- username -->
-          <div class="pt-2 mb-4 position-relative">
-            <label for="username" class="form-label"> Username </label>
-            <div class="input-group has-validation">
-              <span class="input-group-text" id="username">@</span>
-              <input
-                type="text"
-                class="form-control"
-                id="validationTooltipUsername"
-                required
-              />
+        <!-- last name -->
+        <div class="pt-2 mb-4 position-relative">
+          <label for="lastName" class="form-label">Last name</label>
+          <input type="text" class="form-control" id="lastName" required />
 
-              <div class="valid-tooltip">Looks good!</div>
-              <div class="invalid-tooltip">Please choose a valid username.</div>
-            </div>
-          </div>
+          <div class="valid-tooltip">Looks good!</div>
+          <div class="invalid-tooltip">Please fill last name.</div>
+        </div>
 
-          <!-- image -->
-          <div class="pt-2 mb-4 position-relative">
-            <label for="file" class="form-label"> Image </label>
-            <input
-              type="file"
-              id="file"
-              accept="image/x-png,image/gif,image/jpeg"
-              class="form-control"
-              aria-label="file example"
-              required
-              onchange="fileChanged(this)"
-            />
+        <!-- username -->
+        <div class="pt-2 mb-4 position-relative">
+          <label for="username" class="form-label"> Username </label>
+          <div class="input-group has-validation">
+            <span class="input-group-text" id="username">@</span>
+            <input type="text" class="form-control" id="validationTooltipUsername" required />
 
             <div class="valid-tooltip">Looks good!</div>
-            <div class="invalid-tooltip">
-              Example invalid form file feedback
-            </div>
-          </div>
-
-          <div class="pt-2 col-12">
-            <button id="submit" class="btn btn-primary" type="submit">
-              Submit form
-            </button>
+            <div class="invalid-tooltip">Please choose a valid username.</div>
           </div>
         </div>
 
-        <!-- form image placeholder column -->
-        <div class="col-md-6 d-flex justify-content-center align-items-center">
-          <!-- show image before upload -->
-          <div class="position-relative">
-            <img
-              src="https://via.placeholder.com/640x360/e9ecef/666?text=put+your+picture"
-              id="output"
-              class="img-fluid img-thumbnail my-img-responsive p-2"
-            />
+        <!-- image -->
+        <div class="pt-2 mb-4 position-relative">
+          <label for="file" class="form-label"> Image </label>
+          <input type="file" id="file" accept="image/x-png,image/gif,image/jpeg" class="form-control"
+            aria-label="file example" required onchange="fileChanged(this)" />
+
+          <div class="valid-tooltip">Looks good!</div>
+          <div class="invalid-tooltip">
+            Example invalid form file feedback
           </div>
         </div>
-      </form>
-    </div>
 
-    <!-- ------------------------------ bootstrap ------------------------------ -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
-      crossorigin="anonymous"
-    ></script>
-    <!-- -------------------------------- EXIF --------------------------------- -->
-    <script type="text/javascript" src="/js/exif.js"></script>
-    <!-- ------------------------------- Script -------------------------------- -->
-    <script src="/js/script.js"></script>
-  </body>
+        <!-- submit button -->
+        <div class="pt-2 col-12">
+          <button id="submit" class="btn btn-primary" type="submit">
+            Submit form
+          </button>
+        </div>
+      </div>
+
+      <!-- form image placeholder column -->
+      <div class="col-md-6 d-flex justify-content-center align-items-center">
+        <!-- show image before upload -->
+        <div class="position-relative">
+          <img src="https://via.placeholder.com/640x360/e9ecef/666?text=put+your+picture" id="output"
+            class="img-fluid img-thumbnail my-img-responsive p-2" />
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- ------------------------------ bootstrap ------------------------------ -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- ----------------------------- SweetAlert2 ----------------------------- -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <!-- -------------------------------- EXIF --------------------------------- -->
+  <script type="text/javascript" src="/js/exif.js"></script>
+  <!-- ------------------------------- Script -------------------------------- -->
+  <script src="/js/script.js"></script>
+</body>
+
 </html>

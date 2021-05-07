@@ -61,6 +61,19 @@ function canSubmit() {
 // submit form to the server
 function submitForm(event) {
   event.preventDefault();
-  canFormSubmit ? alert("it is a true image") : alert("warning");
+
+  canFormSubmit
+    ? Swal.fire({
+        icon: "success",
+        title: "Good job!",
+        text: "Your picture is uploaded",
+      })
+    : Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "You should chose image with gps metadata",
+      });
+
+  // alert("it is a true image") : alert("warning");
 }
 /* ------------------ END: Check image has gps data or not ------------------ */
