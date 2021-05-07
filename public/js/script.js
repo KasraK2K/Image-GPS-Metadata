@@ -22,16 +22,59 @@
 /* ---------------------- END: Validate bootstrap form ---------------------- */
 
 /* -------------------------------------------------------------------------- */
-/*                   START: Check image has gps data or not                   */
+/*                          START: Register variables                         */
 /* -------------------------------------------------------------------------- */
 var form = document.querySelector("form#form");
-var file = document.querySelector("input#file").files[0];
+var fileField = document.querySelector("input#file");
+var file = fileField.files[0];
 var outputImage = document.querySelector("img#output");
 var code = document.querySelector("code#code");
-var pre = document.querySelector("pre#pre");
+var codeContainer = document.querySelector("div#codeContainer");
+var alert = document.querySelector("div#alert");
 var canFormSubmit = false;
 var GPSInfo;
+var Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
+/* ------------------------- END: Register variables ------------------------ */
 
+/* -------------------------------------------------------------------------- */
+/*                              START: Before all                             */
+/* -------------------------------------------------------------------------- */
+(function () {
+  if (!navigator.geolocation) {
+    console.log("Geolocation API not supported by this browser.");
+  } else {
+    console.log("Checking location...");
+    navigator.geolocation.getCurrentPosition(success, error);
+  }
+})();
+
+function success(position) {
+  fileField.disabled = false;
+}
+
+function error() {
+  alert.classList.remove("d-none");
+  fileField.disabled = true;
+  Toast.fire({
+    icon: "error",
+    title: "Geolocation error!",
+  });
+}
+/* ----------------------------- END: Before all ---------------------------- */
+
+/* -------------------------------------------------------------------------- */
+/*                   START: Check image has gps data or not                   */
+/* -------------------------------------------------------------------------- */
 // this function trigger when inputted file is changed
 function fileChanged(input) {
   outputImage.src = window.URL.createObjectURL(input.files[0]);
@@ -63,14 +106,17 @@ function canSubmit() {
         for (const key of keys) {
           if (key.slice(0, 3) === "GPS") GPSData[key] = meta[key];
         }
-        pre.classList.remove("d-none");
+        codeContainer.classList.remove("d-none");
         code.innerHTML = JSON.stringify(GPSData, false, "\t");
       }
     }
   });
 }
+/* ------------------ END: Check image has gps data or not ------------------ */
 
-// submit form to the server
+/* -------------------------------------------------------------------------- */
+/*                      START: submit form to the server                      */
+/* -------------------------------------------------------------------------- */
 function submitForm(event) {
   event.preventDefault();
 
@@ -91,4 +137,4 @@ function submitForm(event) {
     // set output image place holder
   }
 }
-/* ------------------ END: Check image has gps data or not ------------------ */
+/* --------------------- END: submit form to the server --------------------- */

@@ -18,6 +18,10 @@ button {
 }
 
 .my-img-responsive {
-  max-height: 360px;
+  max-height: 500px;
   max-width: auto;
+}
+
+code {
+  font-size: 0.9rem !important;
 }
