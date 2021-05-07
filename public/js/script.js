@@ -86,11 +86,12 @@ function canSubmit() {
   EXIF.getData(document.querySelector("input#file").files[0], function () {
     var meta = EXIF.getAllTags(this);
 
-    console.log("meta", meta);
-
     if (!meta) {
       canFormSubmit = false;
-      // TODO: alert can not find any meta data
+      Toast.fire({
+        icon: "error",
+        title: "Can not find any meta data!",
+      });
     } else {
       if (!meta.GPSLatitudeRef) canFormSubmit = false;
       else if (!meta.GPSLatitude || !meta.GPSLatitude.length)
@@ -100,14 +101,25 @@ function canSubmit() {
         canFormSubmit = false;
       else {
         canFormSubmit = true;
+      }
+
+      if (canFormSubmit) {
         // show table of metadata
         let GPSData = {};
         const keys = Object.keys(meta);
+        GPSData.DateTimeOriginal = meta.DateTimeOriginal;
         for (const key of keys) {
           if (key.slice(0, 3) === "GPS") GPSData[key] = meta[key];
         }
         codeContainer.classList.remove("d-none");
         code.innerHTML = JSON.stringify(GPSData, false, "\t");
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: "Can not find GPS Meta Data!",
+        });
+        code.innerHTML = "";
+        codeContainer.classList.add("d-none");
       }
     }
   });
