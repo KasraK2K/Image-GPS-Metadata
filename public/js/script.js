@@ -27,6 +27,8 @@
 var form = document.querySelector("form#form");
 var file = document.querySelector("input#file").files[0];
 var outputImage = document.querySelector("img#output");
+var code = document.querySelector("code#code");
+var pre = document.querySelector("pre#pre");
 var canFormSubmit = false;
 var GPSInfo;
 
@@ -53,7 +55,17 @@ function canSubmit() {
       else if (!meta.GPSLongitudeRef) canFormSubmit = false;
       else if (!meta.GPSLongitude || !meta.GPSLongitude.length)
         canFormSubmit = false;
-      else canFormSubmit = true;
+      else {
+        canFormSubmit = true;
+        // show table of metadata
+        let GPSData = {};
+        const keys = Object.keys(meta);
+        for (const key of keys) {
+          if (key.slice(0, 3) === "GPS") GPSData[key] = meta[key];
+        }
+        pre.classList.remove("d-none");
+        code.innerHTML = JSON.stringify(GPSData, false, "\t");
+      }
     }
   });
 }
@@ -62,18 +74,21 @@ function canSubmit() {
 function submitForm(event) {
   event.preventDefault();
 
-  canFormSubmit
-    ? Swal.fire({
-        icon: "success",
-        title: "Good job!",
-        text: "Your picture is uploaded",
-      })
-    : Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "You should chose image with gps metadata",
-      });
-
-  // alert("it is a true image") : alert("warning");
+  if (canFormSubmit) {
+    Swal.fire({
+      icon: "success",
+      title: "Good job!",
+      text: "Your picture is uploaded",
+    });
+    // post to server
+  } else {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "You should chose image with gps metadata",
+    });
+    // clear form image
+    // set output image place holder
+  }
 }
 /* ------------------ END: Check image has gps data or not ------------------ */
